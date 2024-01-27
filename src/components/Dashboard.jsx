@@ -1,4 +1,4 @@
-export function Dashboard() {
+export default function Dashboard() {
     return (
         <div className="prl-40">
             <div className="flex justify-between items-center p-2 bg-white border border-gray-200 shadow">

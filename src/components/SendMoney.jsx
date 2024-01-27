@@ -1,4 +1,4 @@
-export function SendMoney() {
+export default function SendMoney() {
     return (
         <div className="flex justify-center items-center h-screen w-screen z-50 overflow-y-auto overflow-x-hidden">
          <div className="bg-white border border-gray-200 rounded-lg shadow py-10 px-20 w-[450px] relative">
