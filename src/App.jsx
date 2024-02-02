@@ -3,19 +3,17 @@ import {
 } from "react-router-dom";
 import { Suspense, lazy } from "react";
 
-const SignUp = lazy(()=> import("./components/SignUp")) 
-const SignIn = lazy(()=> import("./components/SignIn")) 
-const Dashboard = lazy(()=> import("./components/Dashboard")) 
-const SendMoney = lazy(()=> import("./components/SendMoney")) 
-// import { SignIn } from "./components/SignIn";
-// import { Dashboard } from "./components/Dashboard";
-// import { SendMoney } from "./components/SendMoney";
+const SignUp = lazy(()=> import("./pages/SignUp")); 
+const SignIn = lazy(()=> import("./pages/SignIn")); 
+const Dashboard = lazy(()=> import("./pages/Dashboard")); 
+const SendMoney = lazy(()=> import("./pages/SendMoney")); 
 
 function App() {
   return (
     <>
        <BrowserRouter>
         <Routes>
+        <Route path="/" element={ <Suspense fallback="Loading">test here</Suspense> }  />
           <Route path="/signup" element={ <Suspense fallback="Loading"><SignUp /></Suspense> }  />
           <Route path="/signin" element={ <Suspense fallback="Loading"><SignIn /></Suspense> } />
           <Route path="/dashboard" element={ <Suspense fallback="Loading"><Dashboard /></Suspense> } />
@@ -31,3 +29,5 @@ function App() {
 export default App
 
 // https://paymentwallet.onrender.com/api/v1/
+
+// https://paymentwallet.onrender.com/api/v1/user/bulk?filter=Bin
