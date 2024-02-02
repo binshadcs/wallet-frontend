@@ -2,6 +2,7 @@ import {
   BrowserRouter, Route, Routes,
 } from "react-router-dom";
 import { Suspense, lazy } from "react";
+import { Index } from "./components/Index";
 
 const SignUp = lazy(()=> import("./pages/SignUp")); 
 const SignIn = lazy(()=> import("./pages/SignIn")); 
@@ -13,7 +14,7 @@ function App() {
     <>
        <BrowserRouter>
         <Routes>
-        <Route path="/" element={ <Suspense fallback="Loading">test here</Suspense> }  />
+        <Route path="/" element={ <Suspense fallback="Loading"> <Index /> </Suspense> }  />
           <Route path="/signup" element={ <Suspense fallback="Loading"><SignUp /></Suspense> }  />
           <Route path="/signin" element={ <Suspense fallback="Loading"><SignIn /></Suspense> } />
           <Route path="/dashboard" element={ <Suspense fallback="Loading"><Dashboard /></Suspense> } />

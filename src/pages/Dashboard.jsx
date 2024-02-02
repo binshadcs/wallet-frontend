@@ -1,8 +1,16 @@
 import axios from "axios";
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Navigate, useNavigate } from "react-router-dom"
+import { useUser } from "../hooks/useUser";
 
 export default function Dashboard() {
+    const {loading , userdetiles } = useUser();
+    if(loading) {
+        return <div>Loading.......</div>
+    }
+    if(!userdetiles) {
+        return <Navigate to={"/signin"} />
+    }
     return (
         <div className="prl-40">
             <Appbar username={"Binshadcs"} />
@@ -26,11 +34,10 @@ function Appbar({username}) {
     )
 }
 
-function Users() {
-    // add two state 1.For filter from input box 2.For setting users from backend response
-    // useEffect for fetch data from backend  
-    // https://paymentwallet.onrender.com/api/v1/user/bulk?filter=Bin
-    const [input, setInput ] = useState("");
+// https://paymentwallet.onrender.com/api/v1/user/bulk?filter=Bin
+
+function Users() { 
+    const [input, setInput ] = useState(""); 
     const [users, setUsers] = useState([]); 
     useEffect(()=> {
         axios.get(`https://paymentwallet.onrender.com/api/v1/user/bulk?filter=${input}`, 
@@ -70,8 +77,6 @@ function Balance({balance}) {
         </div>
     )
 }
-
-
 
 // pass user object
 function User({user}) {

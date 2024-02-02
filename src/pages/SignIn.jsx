@@ -1,11 +1,19 @@
 import axios from "axios";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useUser } from "../hooks/useUser";
 
 export default function SignIn() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const {loading , userdetiles } = useUser();
+    if(loading) {
+        return <div>Loading.......</div>
+    }
+    if(!userdetiles) {
+        return <Navigate to={"/signin"} />
+    }
     return (
         <section className="bg-gray-50 ">
             <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">

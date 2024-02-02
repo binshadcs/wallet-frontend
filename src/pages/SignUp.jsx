@@ -1,12 +1,21 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import { useUser } from "../hooks/useUser";
 
 export default function SignUp() {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("")   
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate()  
+    const {loading , userdetiles } = useUser();
+    if(loading) {
+        return <div>Loading.......</div>
+    }
+    if(!userdetiles) {
+        return <Navigate to={"/signin"} />
+    }
     return (
         <section className="bg-gray-50 ">
             <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -45,7 +54,10 @@ export default function SignUp() {
                                     username,
                                     password
                                 })
-                                localStorage.setItem("token", response.data.token)
+                                if (response.data.token) {
+                                    localStorage.setItem("token", response.data.token)
+                                    navigate("/dashboard");
+                                }
                             }} className="w-full text-white bg-blue-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Create an account</button>
                             <p className="text-sm font-light text-gray-500 ">
                                 Already have an account? <Link to={'/signin'} className="font-medium text-primary-600 hover:underline ">Login here</Link>
